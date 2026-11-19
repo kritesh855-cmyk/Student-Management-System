@@ -1,0 +1,6 @@
+{
+  "name": "AutoPilot OS",
+  "description": "Your Personal AI. Your Digital Workforce. Multi-agent personal operating system with PostgreSQL memory, Gemini planning, Gmail, Google Calendar, Google Drive, and human-in-the-loop approvals.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

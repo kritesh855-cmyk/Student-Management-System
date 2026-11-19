@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduCore — College Student Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="/" class="brand">
+          <i data-lucide="graduation-cap" class="brand-icon"></i>
+          <span>EduCore SMS</span>
+        </a>
+
+        <nav class="topbar-nav" aria-label="Primary">
+          <a href="#structure">Folder Structure</a>
+          <a href="#roadmap">Build Phases</a>
+          <a href="#server-check">Server Check</a>
+        </nav>
+
+        <button id="checkServerBtn" class="btn-primary" type="button">
+          <i data-lucide="activity" class="btn-icon"></i>
+          <span>Test Server</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero-card">
+        <p class="kicker">BCA Minor Project · Step 1 of 13</p>
+        <h1>College Student Management System</h1>
+        <p class="subtitle">
+          Project foundation aur modular folder structure ready hai. Neeche aap
+          live server health verify kar sakte hain before moving to Step 2
+          (Frontend Design &amp; Dashboard).
+        </p>
+
+        <div id="server-check" class="status-panel" aria-live="polite">
+          <div class="status-row">
+            <span class="status-label">Backend API Endpoint</span>
+            <code class="mono-text">GET /api/health</code>
+          </div>
+          <div class="status-row">
+            <span class="status-label">Connection Result</span>
+            <span id="serverStatusText" class="status-value">
+              Click "Test Server" to check Express backend...
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">Last Checked</span>
+            <span id="serverTimestamp" class="mono-text muted">—</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid-two">
+        <section id="structure" class="panel">
+          <div class="panel-header">
+            <h2>01. Project Folder Structure</h2>
+            <span class="meta-text">Clean MVC Layout</span>
+          </div>
+          <pre class="code-tree"><code>student-management-system/
+├── server.ts                  # Main Express server (Port 3000)
+├── .env.example               # Environment variables template
+├── backend/
+│   ├── config/                # MongoDB connection (Step 4)
+│   ├── models/                # Mongoose schemas (Steps 5–11)
+│   ├── controllers/           # Business logic (Steps 3–12)
+│   ├── routes/
+│   │   └── healthRoutes.js    # Live health check route (Step 1)
+│   └── middleware/            # Auth &amp; file upload middleware
+└── public/
+    ├── index.html             # Frontend entry point
+    ├── css/
+    │   └── style.css          # Light blue/white/grey stylesheet
+    ├── js/
+    │   └── main.js            # Client-side JavaScript
+    └── uploads/               # Student profile photos (Step 6)</code></pre>
+        </section>
+
+        <section id="roadmap" class="panel">
+          <div class="panel-header">
+            <h2>02. Step-by-Step Build Sequence</h2>
+            <span class="meta-text">13 Structured Steps</span>
+          </div>
+          <ol class="step-list">
+            <li class="step-item active">
+              <span class="step-num">01</span>
+              <span>Project setup and folder structure (Current)</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">02</span>
+              <span>Frontend design, login page &amp; dashboard UI</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">03</span>
+              <span>Backend Express API architecture</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">04</span>
+              <span>MongoDB connection &amp; Mongoose setup</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">05</span>
+              <span>Admin authentication (Login &amp; Logout)</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">06</span>
+              <span>Student Management CRUD &amp; profile photo</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">07</span>
+              <span>Attendance management &amp; 75% warning</span>
+            </li>
+            <li class="step-item">
+              <span class="step-num">08–13</span>
+              <span>Teachers, Courses, Exams, Fees, Reports &amp; Polish</span>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

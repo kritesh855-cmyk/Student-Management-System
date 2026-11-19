@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Delete Resume — FolioCraft{% endblock %}
+{% block content %}
+<div class="fc-card" style="max-width:520px; margin:3rem auto;">
+  <h1 style="margin-top:0; font-size:1.3rem;">Delete Resume</h1>
+  <p style="color:#475569;">
+    Are you sure you want to permanently delete <strong>{{ resume.title }}</strong> ({{ resume.full_name }})?
+  </p>
+  <form method="post" style="display:flex; gap:0.75rem; margin-top:1.5rem;">
+    {% csrf_token %}
+    <button type="submit" class="fc-btn fc-btn-danger">Confirm Delete</button>
+    <a href="{% url 'resumes:dashboard' %}" class="fc-btn fc-btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

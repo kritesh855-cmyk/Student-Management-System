@@ -1,0 +1,181 @@
+[
+  {
+    "id": "res_aarav_2026",
+    "title": "Campus Placement — Backend Engineer",
+    "fullName": "Aarav Sharma",
+    "jobTitle": "B.Tech Computer Science & Engineering (2026)",
+    "email": "aarav.sharma@nit.edu.in",
+    "phone": "+91 98765 43210",
+    "location": "Bengaluru, India",
+    "linkedinUrl": "https://linkedin.com/in/aarav-sharma-cs",
+    "githubUrl": "https://github.com/aarav-sharma-dev",
+    "portfolioUrl": "https://aaravsharma.dev",
+    "summary": "Final-year Computer Science undergraduate focused on Python, Django MVT architectures, relational database modeling, and scalable REST APIs. Experienced in building production-ready web tools and optimizing SQL query pipelines.",
+    "templateChoice": "classic",
+    "accentColor": "#1E3A8A",
+    "educations": [
+      {
+        "id": "edu_1",
+        "institution": "National Institute of Technology, Karnataka",
+        "degree": "Bachelor of Technology (B.Tech)",
+        "fieldOfStudy": "Computer Science & Engineering",
+        "startYear": "2022",
+        "endYear": "2026",
+        "gpa": "8.92 / 10.0",
+        "coursework": "Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Software Engineering"
+      },
+      {
+        "id": "edu_2",
+        "institution": "Delhi Public School, R.K. Puram",
+        "degree": "Senior Secondary (Class XII, CBSE)",
+        "fieldOfStudy": "Physics, Chemistry, Mathematics, CS",
+        "startYear": "2020",
+        "endYear": "2022",
+        "gpa": "95.4%",
+        "coursework": "Python Programming, Relational SQL"
+      }
+    ],
+    "experiences": [
+      {
+        "id": "exp_1",
+        "company": "CloudScale Technologies",
+        "role": "Software Engineering Intern (Python / Django)",
+        "location": "Bengaluru, India",
+        "startDate": "May 2025",
+        "endDate": "Aug 2025",
+        "isCurrent": false,
+        "description": "Architected multi-tenant Django ORM models and inline formsets for internal candidate tracking, cutting manual HR review time by 42%.\nEliminated N+1 database bottlenecks using select_related and prefetch_related, reducing p95 endpoint latency from 340ms to 95ms.\nWrote 28 automated Django TestCase integration tests achieving 94% coverage across core views."
+      },
+      {
+        "id": "exp_2",
+        "company": "ACM Student Chapter — NITK",
+        "role": "Technical Lead & Web Coordinator",
+        "location": "Surathkal, India",
+        "startDate": "Sep 2024",
+        "endDate": "",
+        "isCurrent": true,
+        "description": "Led a 6-member student engineering team to maintain the annual coding symposium portal serving 1,800+ student registrations.\nConducted hands-on workshops on Python, Django MVT patterns, and Git workflows for 140+ sophomores."
+      }
+    ],
+    "projects": [
+      {
+        "id": "proj_1",
+        "title": "Systematic Resume Creator (Django MVT)",
+        "techStack": "Python 3.11, Django 5, SQLite, xhtml2pdf, HTML/CSS",
+        "projectUrl": "https://github.com/aarav-sharma-dev/django-resume-creator",
+        "description": "Built a normalized 6-table relational resume generator using Django inlineformset_factory inside atomic database transactions.\nImplemented 3 ATS-compatible A4 templates with server-side PDF rendering and user ownership isolation."
+      },
+      {
+        "id": "proj_2",
+        "title": "Academic Course Prerequisite Planner",
+        "techStack": "Python, Django, PostgreSQL, NetworkX",
+        "projectUrl": "https://github.com/aarav-sharma-dev/course-dag-planner",
+        "description": "Modeled university curriculum dependencies as a directed acyclic graph (DAG) to detect circular prerequisites and recommend valid 8-semester schedules."
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill_1",
+        "category": "Languages",
+        "items": "Python, SQL, TypeScript, C++, HTML5, CSS3"
+      },
+      {
+        "id": "skill_2",
+        "category": "Frameworks & Libraries",
+        "items": "Django, Django REST Framework, React, Tailwind CSS"
+      },
+      {
+        "id": "skill_3",
+        "category": "Databases & Tools",
+        "items": "PostgreSQL, SQLite, Git, Docker, Linux, PyTest"
+      }
+    ],
+    "certifications": [
+      {
+        "id": "cert_1",
+        "name": "AWS Certified Cloud Practitioner",
+        "issuer": "Amazon Web Services",
+        "issueYear": "2025",
+        "credentialId": "AWS-CCP-90421"
+      },
+      {
+        "id": "cert_2",
+        "name": "Django for Everybody Specialization",
+        "issuer": "University of Michigan (Coursera)",
+        "issueYear": "2024",
+        "credentialId": "UMICH-DJ-4418"
+      }
+    ],
+    "updatedAt": "2026-11-17T10:30:00.000Z"
+  },
+  {
+    "id": "res_meera_2026",
+    "title": "Data Science & ML Internship CV",
+    "fullName": "Meera Nair",
+    "jobTitle": "M.Sc. Computer Science Candidate",
+    "email": "meera.nair@university.edu",
+    "phone": "+91 91234 56789",
+    "location": "Pune, India",
+    "linkedinUrl": "https://linkedin.com/in/meera-nair-ml",
+    "githubUrl": "https://github.com/meeranair",
+    "portfolioUrl": "",
+    "summary": "Graduate Computer Science student specializing in applied machine learning, statistical modeling, and reproducible Python data pipelines.",
+    "templateChoice": "executive",
+    "accentColor": "#0F172A",
+    "educations": [
+      {
+        "id": "edu_m1",
+        "institution": "Savitribai Phule Pune University",
+        "degree": "Master of Science (M.Sc.)",
+        "fieldOfStudy": "Computer Science",
+        "startYear": "2024",
+        "endYear": "2026",
+        "gpa": "9.1 / 10.0",
+        "coursework": "Statistical Learning, Natural Language Processing, Distributed Systems"
+      }
+    ],
+    "experiences": [
+      {
+        "id": "exp_m1",
+        "company": "FinSight Analytics",
+        "role": "Data Engineering Intern",
+        "location": "Pune, India",
+        "startDate": "Jun 2025",
+        "endDate": "Sep 2025",
+        "isCurrent": false,
+        "description": "Automated daily ETL validation scripts in Python and Pandas across 120K+ financial rows with zero schema drift.\nBuilt an internal Django dashboard for data quality auditing."
+      }
+    ],
+    "projects": [
+      {
+        "id": "proj_m1",
+        "title": "Research Paper Citation Summarizer",
+        "techStack": "Python, Scikit-Learn, FastAPI, PostgreSQL",
+        "projectUrl": "https://github.com/meeranair/citation-graph",
+        "description": "Indexed 14,000+ open-access abstracts with TF-IDF and cosine similarity search for rapid literature surveys."
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill_m1",
+        "category": "Data & ML",
+        "items": "Python, Pandas, NumPy, Scikit-Learn, PyTorch"
+      },
+      {
+        "id": "skill_m2",
+        "category": "Backend & Storage",
+        "items": "Django, PostgreSQL, SQLite, Docker"
+      }
+    ],
+    "certifications": [
+      {
+        "id": "cert_m1",
+        "name": "Deep Learning Specialization",
+        "issuer": "DeepLearning.AI",
+        "issueYear": "2025",
+        "credentialId": "DLAI-8821"
+      }
+    ],
+    "updatedAt": "2026-11-16T14:20:00.000Z"
+  }
+]

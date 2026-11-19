@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}{{ mode }} Resume — FolioCraft{% endblock %}
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+  <h1 style="margin:0; font-size:1.5rem;">{{ mode }} Resume</h1>
+  <a href="{% url 'resumes:dashboard' %}" class="fc-btn fc-btn-secondary">Back to Dashboard</a>
+</div>
+
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  <div class="fc-card">
+    <h2 style="margin-top:0; font-size:1.1rem;">1. Profile & Template Preferences</h2>
+    <div class="fc-grid-2">
+      {% for field in form %}
+        <div {% if field.name == "summary" %}style="grid-column:1 / -1;"{% endif %}>
+          <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.25rem;">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div style="color:#dc2626; font-size:0.8rem; margin-top:0.2rem;">{{ field.errors|join:", " }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fc-card" data-formset="edu">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h2 style="margin:0; font-size:1.1rem;">2. Education</h2>
+      <button type="button" class="fc-btn fc-btn-secondary add-row-btn" data-prefix="edu">+ Add Education</button>
+    </div>
+    {{ education_fs.management_form }}
+    <div class="formset-rows">
+      {% for subform in education_fs %}
+        <div class="formset-row" style="border-top:1px solid #e2e8f0; padding-top:1rem; margin-top:1rem;">
+          {{ subform.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fc-card" data-formset="exp">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h2 style="margin:0; font-size:1.1rem;">3. Experience</h2>
+      <button type="button" class="fc-btn fc-btn-secondary add-row-btn" data-prefix="exp">+ Add Experience</button>
+    </div>
+    {{ experience_fs.management_form }}
+    <div class="formset-rows">
+      {% for subform in experience_fs %}
+        <div class="formset-row" style="border-top:1px solid #e2e8f0; padding-top:1rem; margin-top:1rem;">
+          {{ subform.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fc-card" data-formset="proj">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h2 style="margin:0; font-size:1.1rem;">4. Academic & Technical Projects</h2>
+      <button type="button" class="fc-btn fc-btn-secondary add-row-btn" data-prefix="proj">+ Add Project</button>
+    </div>
+    {{ project_fs.management_form }}
+    <div class="formset-rows">
+      {% for subform in project_fs %}
+        <div class="formset-row" style="border-top:1px solid #e2e8f0; padding-top:1rem; margin-top:1rem;">
+          {{ subform.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fc-card" data-formset="skill">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h2 style="margin:0; font-size:1.1rem;">5. Technical Skills</h2>
+      <button type="button" class="fc-btn fc-btn-secondary add-row-btn" data-prefix="skill">+ Add Skill Group</button>
+    </div>
+    {{ skill_fs.management_form }}
+    <div class="formset-rows">
+      {% for subform in skill_fs %}
+        <div class="formset-row" style="border-top:1px solid #e2e8f0; padding-top:1rem; margin-top:1rem;">
+          {{ subform.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="fc-card" data-formset="cert">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+      <h2 style="margin:0; font-size:1.1rem;">6. Certifications</h2>
+      <button type="button" class="fc-btn fc-btn-secondary add-row-btn" data-prefix="cert">+ Add Certification</button>
+    </div>
+    {{ certification_fs.management_form }}
+    <div class="formset-rows">
+      {% for subform in certification_fs %}
+        <div class="formset-row" style="border-top:1px solid #e2e8f0; padding-top:1rem; margin-top:1rem;">
+          {{ subform.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-bottom:3rem;">
+    <a href="{% url 'resumes:dashboard' %}" class="fc-btn fc-btn-secondary">Cancel</a>
+    <button type="submit" class="fc-btn fc-btn-primary">Save & Preview Resume</button>
+  </div>
+</form>
+
+<script>
+  document.querySelectorAll(".add-row-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const prefix = btn.dataset.prefix;
+      const container = btn.closest("[data-formset]");
+      const totalInput = container.querySelector(`#id_${prefix}-TOTAL_FORMS`);
+      const rowsWrapper = container.querySelector(".formset-rows");
+      const rows = rowsWrapper.querySelectorAll(".formset-row");
+      if (!rows.length || !totalInput) return;
+
+      const currentCount = parseInt(totalInput.value, 10);
+      const clone = rows[rows.length - 1].cloneNode(true);
+      const regex = new RegExp(`${prefix}-(\\d+)-`, "g");
+
+      clone.innerHTML = clone.innerHTML.replace(regex, `${prefix}-${currentCount}-`);
+      clone.querySelectorAll("input, textarea, select").forEach((el) => {
+        if (el.type === "checkbox") {
+          el.checked = false;
+        } else {
+          el.value = "";
+        }
+      });
+
+      rowsWrapper.appendChild(clone);
+      totalInput.value = currentCount + 1;
+    });
+  });
+</script>
+{% endblock %}

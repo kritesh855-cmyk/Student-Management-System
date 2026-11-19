@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ resume.full_name }} — Classic Academic Resume</title>
+  <style>
+    @page { size: A4; margin: 14mm; }
+    body { font-family: Georgia, "Times New Roman", serif; color: #0f172a; font-size: 10.5pt; line-height: 1.45; margin: 0; }
+    .toolbar { font-family: sans-serif; background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .page { max-width: 780px; margin: 20px auto; background: #ffffff; padding: 36px 44px; border: 1px solid #e2e8f0; }
+    .name { font-size: 20pt; font-weight: bold; margin: 0; color: {{ resume.accent_color }}; text-align: center; }
+    .contact { text-align: center; font-size: 9.5pt; color: #334155; margin-top: 4px; }
+    h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: 0.06em; color: {{ resume.accent_color }}; border-bottom: 1px solid {{ resume.accent_color }}; padding-bottom: 2px; margin: 14px 0 6px; }
+    .row { display: flex; justify-content: space-between; font-weight: bold; font-size: 10.5pt; }
+    .subrow { display: flex; justify-content: space-between; font-style: italic; font-size: 9.5pt; color: #334155; margin-bottom: 4px; }
+    ul { margin: 4px 0 8px 18px; padding: 0; }
+    li { margin-bottom: 2px; }
+    @media print { .toolbar { display: none; } .page { border: none; margin: 0; padding: 0; } }
+  </style>
+</head>
+<body>
+  {% if not is_pdf %}
+  <div class="toolbar">
+    <div><strong>{{ resume.title }}</strong> (Classic Academic)</div>
+    <div>
+      <a href="{% url 'resumes:resume_edit' resume.pk %}" style="margin-right:12px;">Edit</a>
+      <a href="{% url 'resumes:resume_pdf' resume.pk %}" style="margin-right:12px;">Download PDF</a>
+      <a href="{% url 'resumes:dashboard' %}">Dashboard</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="page">
+    <h1 class="name">{{ resume.full_name }}</h1>
+    <div class="contact">
+      {{ resume.email }}{% if resume.phone %} · {{ resume.phone }}{% endif %}{% if resume.location %} · {{ resume.location }}{% endif %}
+      {% if resume.linkedin_url or resume.github_url %}
+        <br />
+        {% if resume.linkedin_url %}{{ resume.linkedin_url }}{% endif %}
+        {% if resume.linkedin_url and resume.github_url %} · {% endif %}
+        {% if resume.github_url %}{{ resume.github_url }}{% endif %}
+      {% endif %}
+    </div>
+
+    {% if resume.summary %}
+      <h2>Summary</h2>
+      <p style="margin:4px 0;">{{ resume.summary }}</p>
+    {% endif %}
+
+    {% if resume.educations.all %}
+      <h2>Education</h2>
+      {% for edu in resume.educations.all %}
+        <div class="row">
+          <span>{{ edu.institution }}</span>
+          <span>{{ edu.start_year }} – {{ edu.end_year }}</span>
+        </div>
+        <div class="subrow">
+          <span>{{ edu.degree }}{% if edu.field_of_study %}, {{ edu.field_of_study }}{% endif %}</span>
+          {% if edu.gpa %}<span>GPA: {{ edu.gpa }}</span>{% endif %}
+        </div>
+        {% if edu.coursework %}<p style="margin:0 0 6px; font-size:9.5pt;">Coursework: {{ edu.coursework }}</p>{% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if resume.experiences.all %}
+      <h2>Experience</h2>
+      {% for exp in resume.experiences.all %}
+        <div class="row">
+          <span>{{ exp.role }} — {{ exp.company }}</span>
+          <span>{{ exp.start_date }} – {% if exp.is_current %}Present{% else %}{{ exp.end_date }}{% endif %}</span>
+        </div>
+        {% if exp.location %}<div class="subrow"><span>{{ exp.location }}</span></div>{% endif %}
+        <ul>
+          {% for bullet in exp.bullet_points %}<li>{{ bullet }}</li>{% endfor %}
+        </ul>
+      {% endfor %}
+    {% endif %}
+
+    {% if resume.projects.all %}
+      <h2>Projects</h2>
+      {% for proj in resume.projects.all %}
+        <div class="row">
+          <span>{{ proj.title }}</span>
+          <span style="font-weight:normal; font-size:9.5pt;">{{ proj.tech_stack }}</span>
+        </div>
+        <ul>
+          {% for bullet in proj.bullet_points %}<li>{{ bullet }}</li>{% endfor %}
+        </ul>
+      {% endfor %}
+    {% endif %}
+
+    {% if resume.skills.all %}
+      <h2>Technical Skills</h2>
+      {% for skill in resume.skills.all %}
+        <p style="margin:2px 0;"><strong>{{ skill.category }}:</strong> {{ skill.items }}</p>
+      {% endfor %}
+    {% endif %}
+
+    {% if resume.certifications.all %}
+      <h2>Certifications</h2>
+      {% for cert in resume.certifications.all %}
+        <p style="margin:2px 0;"><strong>{{ cert.name }}</strong> — {{ cert.issuer }}{% if cert.issue_year %} ({{ cert.issue_year }}){% endif %}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html>

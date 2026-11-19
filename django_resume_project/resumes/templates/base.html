@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}FolioCraft — Django Resume Creator{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'resumes/css/style.css' %}" />
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <header class="fc-header">
+    <a href="{% url 'resumes:dashboard' %}" class="fc-brand">FolioCraft</a>
+    <nav class="fc-nav">
+      {% if user.is_authenticated %}
+        <a href="{% url 'resumes:dashboard' %}">My Resumes</a>
+        <a href="{% url 'resumes:resume_create' %}">New Resume</a>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="fc-btn fc-btn-secondary">Sign Out ({{ user.username }})</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Sign In</a>
+        <a href="{% url 'resumes:register' %}" class="fc-btn fc-btn-primary">Create Account</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="fc-container">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="fc-alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

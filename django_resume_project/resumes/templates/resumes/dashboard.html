@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — FolioCraft{% endblock %}
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; gap:1rem; flex-wrap:wrap;">
+  <div>
+    <h1 style="margin:0; font-size:1.5rem;">My Resumes</h1>
+    <p style="margin:0.25rem 0 0; color:#475569; font-size:0.9rem;">Create, manage, and export ATS-friendly resumes to PDF.</p>
+  </div>
+  <a href="{% url 'resumes:resume_create' %}" class="fc-btn fc-btn-primary">+ New Resume</a>
+</div>
+
+<form method="get" class="fc-card" style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search by title, name, or role..." class="fc-input" style="flex:1; min-width:220px;" />
+  <select name="template" class="fc-select" style="width:200px;">
+    <option value="">All Templates</option>
+    {% for value, label in template_choices %}
+      <option value="{{ value }}" {% if template_filter == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" class="fc-btn fc-btn-secondary">Filter</button>
+</form>
+
+{% if resumes %}
+  {% for resume in resumes %}
+    <div class="fc-card" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div>
+        <h2 style="margin:0; font-size:1.1rem;">{{ resume.title }}</h2>
+        <div style="font-size:0.85rem; color:#475569; margin-top:0.25rem;">
+          {{ resume.full_name }} · {{ resume.get_template_choice_display }} · Updated {{ resume.updated_at|date:"M d, Y" }}
+        </div>
+      </div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <a href="{% url 'resumes:resume_preview' resume.pk %}" class="fc-btn fc-btn-secondary">Preview</a>
+        <a href="{% url 'resumes:resume_edit' resume.pk %}" class="fc-btn fc-btn-secondary">Edit</a>
+        <a href="{% url 'resumes:resume_pdf' resume.pk %}" class="fc-btn fc-btn-primary">Export PDF</a>
+        <form method="post" action="{% url 'resumes:resume_duplicate' resume.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="fc-btn fc-btn-secondary">Duplicate</button>
+        </form>
+        <a href="{% url 'resumes:resume_delete' resume.pk %}" class="fc-btn fc-btn-danger">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="fc-card" style="text-align:center; padding:3rem 1.5rem;">
+    <h2 style="margin-top:0; font-size:1.15rem;">No resumes created yet</h2>
+    <p style="color:#475569; font-size:0.9rem;">Create your first structured resume to preview templates and export PDFs.</p>
+    <a href="{% url 'resumes:resume_create' %}" class="fc-btn fc-btn-primary">Create First Resume</a>
+  </div>
+{% endif %}
+{% endblock %}

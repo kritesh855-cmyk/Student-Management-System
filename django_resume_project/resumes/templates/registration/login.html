@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Sign In — FolioCraft{% endblock %}
+{% block content %}
+<div class="fc-card" style="max-width:440px; margin:3rem auto;">
+  <h1 style="margin-top:0; font-size:1.4rem;">Sign In</h1>
+  <p style="color:#475569; font-size:0.9rem;">Access your saved resumes and templates.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="fc-btn fc-btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;">Sign In</button>
+  </form>
+  <p style="margin-top:1rem; font-size:0.875rem; color:#475569;">
+    New student? <a href="{% url 'resumes:register' %}">Create an account</a>.
+  </p>
+</div>
+{% endblock %}
